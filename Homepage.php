@@ -253,9 +253,7 @@ $invoice=rand();
                       <th>Position : </th>
                       <td><?php echo $row['position'] ?></td>
                   </tr>
-              
-              </table>
-                    
+              </table>      
             </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

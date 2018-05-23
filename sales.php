@@ -123,7 +123,7 @@ $invoice=rand();
                                 
                                       while($row=mysqli_fetch_assoc($res))
                                         {?>
-                                      <option value="<?php echo $row['product_id'] ?>" ><?php echo $row['Generic'] ?>-<?php echo $row['Category'] ?> </option>
+                                      <option value="<?php echo $row['product_id'] ?>" ><?php echo $row['brand_name'] ?>-<?php echo $row['Generic'] ?>-<?php echo $row['Category'] ?> </option>
                                     
                                       <?php
                                       } ?>
