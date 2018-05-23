@@ -133,34 +133,34 @@ $invoice=rand();
                             <div class="form-row">
                               <div class="col-md-6">
                                 <label for="fname">First name</label>
-                                <input class="form-control" id="fname" name="fname" type="text" aria-describedby="nameHelp" placeholder="Enter first name">
+                                <input class="form-control" id="fname" name="fname" type="text" aria-describedby="nameHelp" placeholder="Enter first name" required>
                               </div>
                               <div class="col-md-6">
                                 <label for="lname">Last name</label>
-                                <input class="form-control" id="lname" name="lname" type="text" aria-describedby="nameHelp" placeholder="Enter last name">
+                                <input class="form-control" id="lname" name="lname" type="text" aria-describedby="nameHelp" placeholder="Enter last name" required>
                               </div>
                             </div>
                           </div>
 
                           <div class="form-group">
                             <label for="email1">Email address</label>
-                            <input class="form-control" id="email1" name="email" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <input class="form-control" id="email1" name="email" type="email" aria-describedby="emailHelp" placeholder="Enter email" required>
                           </div>
                             
                           <div class="form-group">
                             <label for="phone">Phone number</label>
-                            <input class="form-control" id="phone" name="phone" type="tel" aria-describedby="emailHelp" placeholder="Enter Phone Number">
+                            <input class="form-control" id="phone" name="phone" type="tel" aria-describedby="emailHelp" placeholder="Enter Phone Number" required>
                           </div>
 
                           <div class="form-group">
                             <div class="form-row">
                               <div class="col-md-6">
                                 <label for="password1">Password</label>
-                                <input class="form-control" id="password1" name="password1" type="password" placeholder="Password">
+                                <input class="form-control" id="password1" name="password1" type="password" placeholder="Password" required>
                               </div>
                               <div class="col-md-6">
                                 <label for="password">Confirm password</label>
-                                <input class="form-control" id="password" name="password" type="password" placeholder="Confirm password">
+                                <input class="form-control" id="password" name="password" type="password" placeholder="Confirm password" required>
                               </div>
                             </div>
                           </div>

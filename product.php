@@ -134,10 +134,10 @@ $invoice=rand();
                         <form method="post" action="product_details.php">
                           <div class="form-group">
                            
-                                <input class="form-control" id="Bname" name="bname" type="text" aria-describedby="nameHelp" placeholder="Enter Brand name"><br>
+                                <input class="form-control" id="Bname" name="bname" type="text" aria-describedby="nameHelp" placeholder="Enter Brand name" required><br>
                               
                                 
-                                <input class="form-control" id="generic" name="generic" type="text" aria-describedby="nameHelp" placeholder="Generic"><br>
+                                <input class="form-control" id="generic" name="generic" type="text" aria-describedby="nameHelp" placeholder="Generic" required><br>
                               
                             
                             
@@ -158,15 +158,15 @@ $invoice=rand();
                            
                               
                             Arrival Date:
-                            <input class="form-control" id="rdate" name="rdate" type="date" aria-describedby="emailHelp" placeholder="Arrival Date"><br>
+                            <input class="form-control" id="rdate" name="rdate" type="date" aria-describedby="emailHelp" placeholder="Arrival Date" required><br>
                              Expire Date: 
-                            <input class="form-control" id="edate" name="edate" type="date" aria-describedby="emailHelp" placeholder="Expire Date"><br>
+                            <input class="form-control" id="edate" name="edate" type="date" aria-describedby="emailHelp" placeholder="Expire Date" required><br>
                           
-                            <input class="form-control" id="original_price" name="original_price" type="number" step="0.01" aria-describedby="emailHelp" placeholder="Original Price BDT"><br>
+                            <input class="form-control" id="original_price" name="original_price" type="number" step="0.01" aria-describedby="emailHelp" placeholder="Original Price BDT" required><br>
                              
-                            <input class="form-control" id="selling_price" name="selling_price" type="number" step="0.01" aria-describedby="emailHelp" placeholder="Selling Price BDT"><br>
+                            <input class="form-control" id="selling_price" name="selling_price" type="number" step="0.01" aria-describedby="emailHelp" placeholder="Selling Price BDT" required><br>
                               
-                            <input class="form-control" id="quantity" name="quantity" type="number" aria-describedby="emailHelp" placeholder="Ouantity Received"><br>
+                            <input class="form-control" id="quantity" name="quantity" type="number" aria-describedby="emailHelp" placeholder="Ouantity Received" required><br>
 
                             <button type="submit" name="submit" class="btn btn-info">Save Changes</button>
                               
@@ -287,10 +287,10 @@ $invoice=rand();
                                         {?>
                            
                                  Brandname:  
-                                <input class="form-control" id="Bname" name="bname" type="text" value="<?php echo $ro['brand_name'] ?>">  <br>
+                                <input class="form-control" id="Bname" name="bname" type="text" value="<?php echo $ro['brand_name'] ?>" required>  <br>
                               
                                 Generic:
-                                <input class="form-control" id="generic" name="generic" type="text"  value="<?php echo $ro['Generic']?>"><br>
+                                <input class="form-control" id="generic" name="generic" type="text"  value="<?php echo $ro['Generic']?>" required><br>
                             
                                 <select  class="form-control" name="category">
                                    <?php
@@ -307,18 +307,18 @@ $invoice=rand();
                                         } ?>
                                </select> <br>
                             Arrival Date:
-                            <input class="form-control" id="rdate" name="rdate" type="date" value="<?php echo $ro['Date_Received'] ?>"><br>
+                            <input class="form-control" id="rdate" name="rdate" type="date" value="<?php echo $ro['Date_Received'] ?>" required><br>
                              Expire Date: 
-                            <input class="form-control" id="edate" name="edate" type="date" value="<?php echo $ro['Date_Expire'] ?>" ><br>
+                            <input class="form-control" id="edate" name="edate" type="date" value="<?php echo $ro['Date_Expire'] ?>" required><br>
                             
                             Original price:
-                            <input class="form-control" id="original_price" name="original_price" type="number" step="0.01" value="<?php echo $ro['Original_Price'] ?>"><br>
+                            <input class="form-control" id="original_price" name="original_price" type="number" step="0.01" value="<?php echo $ro['Original_Price'] ?>" required><br>
                             
                             Selling Price:
-                            <input class="form-control" id="selling_price" name="selling_price" type="number" step="0.01" value="<?php echo $ro['Selling_Price'] ?>"><br>
+                            <input class="form-control" id="selling_price" name="selling_price" type="number" step="0.01" value="<?php echo $ro['Selling_Price'] ?>" required><br>
                               
                             Quantity Received:
-                            <input class="form-control" id="quantity" name="quantity" type="number" value="<?php echo $ro['Quantity']?>"><br>
+                            <input class="form-control" id="quantity" name="quantity" type="number" value="<?php echo $ro['Quantity']?>" required><br>
                               
                     <?php } ?>
 
