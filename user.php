@@ -130,10 +130,10 @@ $invoice=rand();
                           <div class="form-group">
                            
                             
-                                <input class="form-control" id="uname" name="uname" type="text" aria-describedby="nameHelp" placeholder="Username"><br>
+                                <input class="form-control" id="uname" name="uname" type="text" aria-describedby="nameHelp" placeholder="Username" required><br>
                              
                            
-                                <input class="form-control" id="pos" name="pos" type="text" aria-describedby="nameHelp" placeholder="Position"><br>
+                                <input class="form-control" id="pos" name="pos" type="text" aria-describedby="nameHelp" placeholder="Position" required><br>
                               </div>
                           
                         
@@ -142,11 +142,11 @@ $invoice=rand();
                             <div class="form-row">
                               <div class="col-md-6">
                                 
-                                <input class="form-control" id="password1" name="password1" type="password" placeholder="Password">
+                                <input class="form-control" id="password1" name="password1" type="password" placeholder="Password" required>
                               </div>
                               <div class="col-md-6">
                                 
-                                <input class="form-control" id="password" name="password" type="password" placeholder="Confirm password">
+                                <input class="form-control" id="password" name="password" type="password" placeholder="Confirm password" required>
                               </div>
                             </div>
                           </div>

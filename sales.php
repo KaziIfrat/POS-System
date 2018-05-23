@@ -111,7 +111,7 @@ $invoice=rand();
 	        <div class="span5" style="float: left; margin-right: -75px;">
 				<form method='post'>				
 			
-			<input type="hidden" name="invoice" value="<?php echo $_GET['invoice']; ?>" />
+			<input type="hidden" name="invoice" value="<?php echo $_GET['invoice']; ?>" required>
 			<label style="font-size: 19px;"> Select a product:</label>
 			<select id="product" name="product" style="width:350px; "  required>
 				                     <?php
