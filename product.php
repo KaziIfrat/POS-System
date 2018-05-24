@@ -145,13 +145,13 @@ $invoice=rand();
                                    <?php
                                       include 'dbms.php' ;
                                       $sql="SELECT category_name FROM `product_category` WHERE 1" ;
-                                      $res=mysqli_query($conn,$sql);
-                                      if(!$res)
+                                      $res3=mysqli_query($conn,$sql);
+                                      if(!$res3)
                                           echo "error" ;
                                   
-                                      while($row=mysqli_fetch_assoc($res))
+                                      while($row3=mysqli_fetch_assoc($res3))
                                         {?>
-                                      <option value="<?php echo $row['category_name'] ?> "> <?php echo $row['category_name'] ?></option>
+                                      <option value="<?php echo $row3['category_name'] ?> "> <?php echo $row3['category_name'] ?></option>
                                       <?php
                                         } ?>
                                </select> <br>
@@ -207,22 +207,24 @@ $invoice=rand();
                   <th>Quantity Received</th>
                   <th>Quantity Left</th>
                   <th>Total</th>
-                  <th>Action</th>
+                  <th>Action </th>
                 </tr>
               </thead>
             
               <tbody>
                   <?php
                   include 'dbms.php' ;
+                
                   $sql="SELECT * FROM `product` WHERE 1" ;
                   $res=mysqli_query($conn,$sql);
                   if(!$res)
                       echo "error" ;
-                  
+                  $pdid = 0;
                   while($row=mysqli_fetch_assoc($res))
-                  {?>
+                  { ?>
                   <tr>
-                  <td><?php echo $row['brand_name'] ?></td>
+                    <?php $pdid = $row['product_id']  ?>  
+                  <td><?php echo $row['brand_name']  ?> </td>
                   <td><?php echo $row['Generic'] ?></td>
                   <td><?php echo $row['Category'] ?></td>
                   <td><?php echo $row['Date_Received'] ?></td>
@@ -233,19 +235,20 @@ $invoice=rand();
                   <td><?php echo $row['Quantity_Left'] ?></td>
                   <td><?php echo $row['Quantity_Left']*$row['Selling_Price'] ?></td>
                  <td>
-                     <a href="#" name="<?php echo $row['product_id'] ?>"  data-toggle="modal" data-target="#EModal" aria-hidden="true"><i class="fa fa-edit" ></i></a>  &nbsp
+                     <div class='btn-group' role='group' aria-label='...'>
+                     <a href="#edit<?php echo $row['product_id']?>" data-toggle="modal"><button type='button' class='btn btn-warning btn-sm'> <span class='fa fa-edit' aria-hidden='true'></span></button></a>  &nbsp
                      
-                     <a href="#" name="<?php echo $row['product_id'] ?>"  data-toggle="modal" data-target="#DModal" aria-hidden="true"><i class="fa fa-trash" ></i> </a>    
+                      <a href="#delete<?php echo $row['product_id'] ?>" data-toggle="modal"><button type='button' class='btn btn-danger btn-sm'><span class='fa fa-trash' aria-hidden='true'></span></button></a> 
+                     </div>
          
                 </td>
-                     
-                      
+                           
                     <!-- Delete Modal-->
-                    <div class="modal fade" id="DModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="delete<?php echo $row['product_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Sure want to delete?</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Sure want to delete? <?php echo $row['product_id'] ?></h5>
                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
@@ -260,7 +263,7 @@ $invoice=rand();
                     </div>
                       
                     <!-- Edit Modal-->
-                  <div class="modal fade" id="EModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="edit<?php echo $row['product_id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                      <div class="modal-header">
@@ -275,9 +278,8 @@ $invoice=rand();
                         <form method="post" action="Editproduct.php">
                           <div class="form-group">
                                 <?php
-                               
-                                      $_SESSION['PID']=$row['product_id'];
                                       $p=$row['product_id'];
+                                    
                                       $sql1="SELECT * FROM `product` WHERE product_id=$p" ;
                                       $res1=mysqli_query($conn,$sql1);
                                       if(!$res1)
@@ -285,7 +287,7 @@ $invoice=rand();
                                   
                                       while($ro=mysqli_fetch_assoc($res1))
                                         {?>
-                           
+                                 <input type="hidden" name="pid" value="<?php echo $p ?>">
                                  Brandname:  
                                 <input class="form-control" id="Bname" name="bname" type="text" value="<?php echo $ro['brand_name'] ?>" required>  <br>
                               
@@ -332,8 +334,7 @@ $invoice=rand();
                       </div>
                     
                   </tr>    
-                  <?php
-                                        
+                  <?php                  
                   }
                   ?>
     

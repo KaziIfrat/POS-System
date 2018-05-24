@@ -3,11 +3,11 @@ include 'dbms.php';
 
     $id=$_GET['q'];
     
-    $sql="DELETE FROM `product` WHERE product_id=$id" ;
-    $res=mysqli_query($conn,$sql);
-    if(!$res)
+    $sql4="DELETE FROM `product` WHERE product_id=$id " ;
+    $res4=mysqli_query($conn,$sql4);
+    if(!$res4)
     {
-        echo "$sql";
+        echo "$sql4";
     }
     else
     {
