@@ -54,7 +54,7 @@ $invoice=rand();
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Users">
-          <a class="nav-link" href="#collapseExamplePages">
+          <a class="nav-link" href="user.php">
             <i class="fa fa-fw fa-user"></i>
             <span class="nav-link-text">Users</span>
           </a>
