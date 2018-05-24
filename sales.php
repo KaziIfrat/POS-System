@@ -220,7 +220,8 @@ $invoice=rand();
                <td><?php echo $row['quantty'] ?></td>
                <td><?php echo $row['Amount'] ?> </td>
                <td><?php echo $row['profit'] ?> </td>
-               <td><a href="deleteSale.php?sid=<?php echo $row['sales_id'] ?>&invoice=<?php echo $inv ?>"  aria-hidden="true"><i class="fa fa-trash" ></i> </a> </td>
+               <td>
+               <a href="deleteSale.php?sid=<?php echo $row['sales_id'] ?>&invoice=<?php echo $inv ?>" ><button type='button' class='btn btn-danger btn-sm'><span class='fa fa-trash' aria-hidden='true'></span></button></a></td>
                
            </tr>
         
