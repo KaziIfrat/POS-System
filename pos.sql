@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2018 at 10:20 AM
+-- Generation Time: May 25, 2018 at 06:25 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -42,8 +42,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `first_name`, `last_name`, `email`, `phone`, `password`) VALUES
-(6, 'Hasin', 'Tushar', 'hh@gmail.com', '01111111111', 'tttt'),
-(8, 'Imran', 'Saimun', 'ss@gmail.com', '01111111111', 'ssss');
+(8, 'Imran', 'Saimun', 'ss@gmail.com', '01111111111', 'ssss'),
+(12, 'Fahmi', 'kazi', 'ff@gmail.com', '01111111111', 'ffff');
 
 -- --------------------------------------------------------
 
@@ -70,9 +70,9 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `brand_name`, `Generic`, `Category`, `Date_Received`, `Date_Expire`, `Original_Price`, `Selling_Price`, `Quantity`, `Quantity_Left`, `Total_BDT`) VALUES
-(13, 'Mac', 'lipstick', 'Beauty ', '2018-05-01', '2018-06-09', 3000, 3500, 50, 37, 129500),
-(16, 'Agro', 'Green vegetable', 'Beauty ', '2018-05-01', '2018-05-24', 20, 22, 100, 97, 2134),
-(17, 'Remington-999', 'Hair Straightner', 'Electronics ', '2018-05-01', '2018-05-01', 2000, 2200, 30, 30, 66000),
+(13, 'Mac', 'lipstick', 'Beauty ', '2018-05-01', '2018-06-09', 3000, 3500, 50, 36, 126000),
+(16, 'Agro', 'Green vegetable', 'Beauty ', '2018-05-01', '2018-05-24', 20, 22, 100, 94, 2068),
+(17, 'Remington-999', 'Hair Straightner', 'Electronics ', '2018-05-01', '2018-05-01', 2000, 2200, 30, 22, 48400),
 (18, 'tide', 'detergent', 'Hygin ', '2018-05-01', '2018-06-08', 40, 44, 100, 100, 4400);
 
 -- --------------------------------------------------------
@@ -113,6 +113,17 @@ CREATE TABLE `sales` (
   `profit` double NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sales`
+--
+
+INSERT INTO `sales` (`sales_id`, `invoice_no`, `product_id`, `quantty`, `Amount`, `profit`, `Date`) VALUES
+(17, 501046853, 13, 1, 3500, 500, '2018-05-24'),
+(18, 501046853, 16, 1, 22, 2, '2018-05-24'),
+(20, 1166339061, 16, 2, 44, 4, '2018-05-24'),
+(21, 1166339061, 17, 4, 8800, 800, '2018-05-24'),
+(22, 1166339061, 17, 4, 8800, 800, '2018-05-24');
 
 -- --------------------------------------------------------
 
@@ -180,7 +191,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -198,7 +209,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `sales_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `sales_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `user`

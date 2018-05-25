@@ -1,3 +1,165 @@
+<?php
+         session_start();
+            function fetch_data2()
+            {
+              $out="";
+                $out .= "
+        <style>
+        table{
+          overflow: scroll;
+          padding: 0px;
+          margin-bottom: 20px;
+          position: absolute;
+        }
+        tr th{
+          border:1px solid black;
+          background: #00CED1;
+          align='middle';
+          color:black;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+        td{
+          border:1px solid black;
+          padding-left: 10px;
+          padding-right: 10px;
+
+        }
+        </style>";
+            $out .="<table >
+            <thead>
+            <tr>
+                <th> Brand Name </th>
+                <th> Generic </th>
+                <th> Category </th>
+                <th> Price </th>
+                <th> Quantity </th>
+                <th> Discount </th>
+                <th> Amount </th>
+                
+                
+            </tr>
+        </thead>";
+          include 'dbms.php' ;
+                
+           $tk=$_SESSION['tk'];
+           $inv=$_SESSION['invoice'];
+           $sql="SELECT brand_name,Generic,Category,Selling_Price,quantty,Amount,profit FROM `product` NATURAL JOIN sales WHERE invoice_no=$inv" ;    
+           $res=mysqli_query($conn,$sql);
+           if(!$res){}
+             // echo "error" ;
+            while($row=mysqli_fetch_assoc($res))
+            {
+                
+            $out .= "<tr>
+               <td>". $row['brand_name'] . "</td>
+               <td>" . $row['Generic'] ."</td>
+               <td>" .$row['Category']. "</td>
+               <td>" .$row['Selling_Price']."</td>
+               <td>" . $row['quantty']. "</td>
+              <td>0.00</td>
+               <td>". $row['Amount']. "</td>
+           </tr>" ;
+
+           }   
+                
+          $out .="<tr>
+            <th> </th>
+			<th>  </th>
+			<th>  </th>
+			<th>  </th>
+			<th>  </th>
+			<th>Total : </th> " ;
+                
+	
+                     $sql1="SELECT sum(Amount),sum(profit) FROM `product` NATURAL JOIN sales WHERE invoice_no=$inv" ;
+                       $res1=mysqli_query($conn,$sql1);
+                     
+                          $roww=mysqli_fetch_assoc($res1); 
+                          $change=$tk-$roww['sum(Amount)'];
+          
+                        $out .="<td colspan='1'><strong style='font-size: 20px; color: #222222;'>". $roww['sum(Amount)']. "</strong></td> </tr>";
+                         $out .="   <tr>
+                             <th> </th>
+                            <th>  </th>
+                            <th>  </th>
+                            <th>  </th>
+                            <th>  </th>
+                            <th> Cash Tendered:</th>
+                                <td><strong style='font-size: 20px; color: #222222;'>" .$tk ."</strong></td>
+                            </tr>
+
+                            <tr>
+                             <th> </th>
+                            <th>  </th>
+                            <th>  </th>
+                            <th>  </th>
+                            <th>  </th>
+                            <th> Change:</th>
+                                <td><strong style='font-size: 20px; color: #222222;'> " .$change. "</strong></td></tr> " ;
+           
+                    
+          
+           $out .="</table>" ;
+            return $out;  
+            }
+               
+          function fetch_data1()  
+            { 
+            $output ="";
+            $output .= "<div style='margin-left:75px; margin-top:60px;'>" ;
+        
+        
+           include 'dbms.php' ;
+               
+            $cid=$_SESSION['cid'];
+            $tk=$_SESSION['tk'];
+             $inv=$_SESSION['invoice'];
+           $sql1="SELECT * FROM `customer` WHERE customer_id=$cid";    
+           $res1=mysqli_query($conn,$sql1);
+           if(!$res1)
+              echo "error" ;
+            else
+            {
+                while($ro=mysqli_fetch_assoc($res1))
+                { 
+            $output .="<h5>Customer name : <span style='display: inline; color:red; font-size: 20px; font-weight: normal;'>".$ro['first_name'] ."</span></h5>" ;
+                }
+            }
+           
+          $output .= "<h5>Invoice number : <span style='display: inline;  font-size: 20px; font-weight: normal;'>" . $inv . "</span></h5>" ;
+           $output .= "<h5>Date : <span style='display: inline;  font-size: 20px; font-weight: normal;'> ". date("y/m/d") ."</span></h5> " ;
+            
+               return $output;
+          } 
+                          
+                          
+     if(isset($_POST["generate_pdf"]))  
+    {  
+        require_once('tcpdf/tcpdf.php');  
+        $obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);  
+        $obj_pdf->SetCreator(PDF_CREATOR);  
+        $obj_pdf->SetTitle("Invoice");  
+        $obj_pdf->SetHeaderData('', '', PDF_HEADER_TITLE, PDF_HEADER_STRING);  
+        $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));  
+        $obj_pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));  
+        $obj_pdf->SetDefaultMonospacedFont('helvetica');  
+        $obj_pdf->SetFooterMargin(PDF_MARGIN_FOOTER);  
+        $obj_pdf->SetMargins(PDF_MARGIN_LEFT, '10', PDF_MARGIN_RIGHT);  
+        $obj_pdf->setPrintHeader(false);  
+        $obj_pdf->setPrintFooter(false);  
+        $obj_pdf->SetAutoPageBreak(TRUE, 10);  
+        $obj_pdf->SetFont('helvetica', '', 11);  
+        $obj_pdf->AddPage();  
+        $content = " ";      
+        $content .= fetch_data1();  
+        $content .= fetch_data2();  
+        
+        $obj_pdf->writeHTML($content);  
+        $obj_pdf->Output('file.pdf', 'I');  
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,8 +232,7 @@ $invoice=rand();
       </ul>
            <?php
             include 'dbms.php';
-            session_start();
-
+           
             if(!isset($_SESSION["user_name"])){
                 header("location:index.php");
             }
@@ -115,11 +276,11 @@ $invoice=rand();
             <h5>Customer name : <span style="display: inline; color:red; font-size: 20px; font-weight: normal;"><?php echo $ro['first_name'] ?></span></h5>
                       
           <?php }
-            }
-          } ?>
+            } ?>
+         
           <h5>Invoice number : <span style="display: inline;  font-size: 20px; font-weight: normal;"><?php echo $inv ?></span></h5>
         <h5>Date : <span style="display: inline;  font-size: 20px; font-weight: normal;"><?php echo date("y/m/d") ;?></span></h5>
-                
+            <?php   } ?>  
         </div>
 
         
@@ -146,9 +307,13 @@ $invoice=rand();
           include 'dbms.php' ;
           if(isset($_POST['submit']) )
            {
+             $inv=$_GET['invoice'];
             $cid=$_POST['cid'];
             $tk=$_POST['taka'];
-           $inv=$_GET['invoice'];
+            $_SESSION['cid']=$cid;
+            $_SESSION['tk']=$tk;
+            $_SESSION['invoice']=$inv;
+           
            $sql="SELECT brand_name,Generic,Category,Selling_Price,quantty,Amount,profit FROM `product` NATURAL JOIN sales WHERE invoice_no=$inv" ;    
            $res=mysqli_query($conn,$sql);
            if(!$res)
@@ -186,8 +351,6 @@ $invoice=rand();
                           $row=mysqli_fetch_assoc($res1);  ?>
                
                           <td colspan="1"><strong style="font-size: 20px; color: #222222;"> <?php echo $row['sum(Amount)'] ?> </strong></td>
-                          
-                 
          
             <tr>
              <th> </th>
@@ -214,8 +377,9 @@ $invoice=rand();
    
 	</tbody>
 </table>
-        
-		<button class="btn btn-secondary btn-lg btn-block" style="margin-left:1px; background-color: gray"; ><i class="fa fa-print"></i> Print</button><br>
+        <form method='post'>
+		<button class="btn btn-secondary btn-lg btn-block" name="generate_pdf" style="margin-left:1px; background-color: gray"; ><i class="fa fa-print"></i> Print</button><br>
+            </form>
 		</div>
            
         </div>
@@ -314,7 +478,6 @@ $invoice=rand();
 	margin-bottom:10px;
 	background-color:#FFFF99;
 }
-
 .suggestionsBox {
 	position: absolute;
 	left: 10px;
@@ -340,14 +503,11 @@ $invoice=rand();
 	background-color: #FC3;
 	color:#000;
 }
-
-
 .load{
 background-image:url(loader.gif);
 background-position:right;
 background-repeat:no-repeat;
 }
-
 #suggest {
 	position:relative;
 }
@@ -356,7 +516,6 @@ background-repeat:no-repeat;
 	width:268px;
 	border:1px #CCC solid;
 }
-
     .btn-info {
     color: #fff;
     background-color: #28a745d6;
@@ -384,7 +543,6 @@ background-repeat:no-repeat;
 	border-top: 0 none;
 	font-size: 13px;
 }
-
 #resultTable tbody tr td{
 	font:  13px ;
 	
@@ -392,7 +550,6 @@ background-repeat:no-repeat;
 	padding: 10px 14px;
 	border-top: 1px solid #999999;
 }
-
 	#resultTable td{ 
 		padding:7px; border:gray 1px solid;
 	}
